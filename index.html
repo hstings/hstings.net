@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>hstings</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family: sans-serif;
+            font-size: 16px;
+
+            display: flex;
+            justify-content: center;
+
+            background-color: #e7e0d6;
+        }
+
+        .page {
+            width: 90%;
+            max-width: 700px;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .name {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        nav a {
+            color: black;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+            color: blue;
+        }
+
+        .photo {
+            margin-top: 100px;
+        }
+
+        .photo img {
+            width: 400px;
+            max-width: 80vw;
+            display: block;
+            margin: auto;
+        }
+
+        .time {
+            margin-top: 18px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <div class="name">
+            henry akins
+        </div>
+
+        <nav>
+            <a href="#">about</a>
+            <a href="#">blog</a>
+            <a href="#">projects</a>
+            <a href="#">contact</a>
+        </nav>
+
+        <div class="photo">
+            <img src="photo.jpg" alt="">
+        </div>
+
+        <div class="time" id="time"></div>
+
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+
+            const time = now.toLocaleTimeString("en-US", {
+                timeZone: "America/Chicago",
+                hour: "numeric",
+                minute: "2-digit",
+                second: "2-digit"
+            });
+
+            document.getElementById("time").textContent = "TIME IN FAYETTEVILLE: " + time + " CDT";
+        }
+        
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+
+</body>
+</html>
