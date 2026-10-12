@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>collatz — hstings</title>
+  <meta name="description" content="A small, floating exploration of the Collatz conjecture.">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/collatz.css">
+  <script>
+    window.MathJax = { svg: { fontCache: 'none' } };
+  </script>
+  <script id="mathjax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"></script>
+</head>
+<body>
+  <main class="top">
+    <div data-animate><a href="../index.html">⏎ Return</a></div>
+    <section>
+      <h1 data-animate>The Collatz Conjecture</h1>
+      <p data-reveal>
+        If \(n\) is even, use \(\frac{n}{2}\).
+        Otherwise, use \(3n + 1\).
+      </p>
+      
+      <p data-reveal>
+        \[
+          f(n) =
+          \begin{cases}
+            \frac{n}{2}, & n \text{ is even}, \\
+            3n + 1, & n \text{ is odd}.
+          \end{cases}
+        \]
+      </p>
+    </section>
+    <section aria-label="Sequence controls">
+      <form id="form" class="controls" data-reveal>
+        <label for="start">Start at:</label>
+        <input id="start" name="start" type="text" inputmode="numeric" pattern="[0-9]+" maxlength="9" value="19" required aria-describedby="error">
+        <button type="submit">Go!</button>
+        <label for="speed">Speed</label>
+        <select id="speed"><option value="1400">Slow</option><option value="700" selected>Normal</option><option value="280">Fast</option><option value="90">VERY Fast</option></select>
+      </form>
+      <div class="playback" data-reveal>
+        <button id="pause" type="button">pause</button>
+        <button id="step" type="button">step</button>
+        <button id="restart" type="button">restart</button>
+        <button id="clear" type="button">clear</button>
+      </div>
+      <p id="error" role="alert" hidden></p>
+    </section>
+    <section class="graph-section" aria-label="Animated Collatz graph">
+      <div id="space" data-reveal>
+        <svg id="graph" viewBox="0 0 960 560" role="img" aria-labelledby="graph-title graph-desc">
+          <title id="graph-title">Collatz sequence starting at 19</title>
+          <desc id="graph-desc">Numbers appear one at a time, linked by arrows. The current number glows. A text version of the sequence is available below.</desc>
+          <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+          <g id="world"><g id="edges"></g><g id="nodes"></g></g>
+        </svg>
+      </div>
+      <p class="hint" data-animate>Tip: Drag the numbers around! 😁</p>
+    </section>
+    <section>
+      <p id="status" role="status" aria-live="polite">Following 19.</p>
+      <p id="stats"></p>
+      <details><summary>view sequence</summary><p id="sequence"></p></details>
+    </section>
+  </main>
+  <script src="../../assets/js/site.js"></script>
+  <script src="../../assets/js/collatz.js"></script>
+</body>
+</html>

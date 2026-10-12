@@ -1,0 +1,32 @@
+/* site.css owns all page typography, colors, spacing, and text reveals. */
+.controls, .playback { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 14px; }
+input, select, button { font: inherit; color: inherit; word-spacing: inherit; }
+button { padding: 0; border: 0; background: transparent; color: var(--link); text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 3px; cursor: pointer; }
+button:hover { text-decoration-color: var(--link); }
+button:disabled { opacity: .4; cursor: default; }
+input, select { background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 2px 0; }
+input { width: 5.5em; font-variant-numeric: tabular-nums; }
+select { max-width: 7em; }
+input:focus-visible, select:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; }
+.controls label, .hint, .playback { color: var(--muted); }
+#error { color: var(--fg); }
+.graph-section { gap: 14px; }
+#space { width: min(960px, calc(100vw - 24px)); align-self: center; }
+#graph { display: block; width: 100%; height: clamp(330px, 54vh, 560px); overflow: hidden; touch-action: pan-y; }
+.edge { fill: none; stroke: color-mix(in srgb, var(--muted) 40%, transparent); stroke-width: 1.4; marker-end: url(#arrow); }
+.edge.active { stroke: var(--link); stroke-width: 1.8; }
+.node { cursor: grab; }
+.node.dragging { cursor: grabbing; }
+.bubble { transform-box: fill-box; transform-origin: center; animation: pop .65s cubic-bezier(.22,1,.36,1) both; }
+.node circle { fill: var(--pastel); stroke: color-mix(in srgb, var(--fg) 10%, transparent); stroke-width: 1; transition: stroke .3s, filter .3s; }
+.node text { fill: var(--fg); font: inherit; text-anchor: middle; dominant-baseline: central; pointer-events: none; font-variant-numeric: tabular-nums; }
+.node .math-label { color: var(--fg); pointer-events: none; overflow: visible; }
+.node.active circle { stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.8; filter: drop-shadow(0 0 9px var(--pastel)); }
+.node.revisited .bubble { animation: pulse .5s ease-out; }
+.hint { font-size: 14px; }
+#stats { font-variant-numeric: tabular-nums; }
+summary { color: var(--link); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+#sequence { margin-top: 14px; overflow-wrap: anywhere; }
+@keyframes pop { 0% { opacity: 0; transform: scale(.08); } 45% { opacity: 1; transform: scale(1.2, .88); } 68% { transform: scale(.94, 1.07); } 84% { transform: scale(1.03, .98); } 100% { transform: scale(1); } }
+@keyframes pulse { 45% { transform: scale(1.14); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .bubble, .node.revisited .bubble { animation: none; } .node circle { transition: none; } }

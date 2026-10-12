@@ -6,6 +6,54 @@
   <title>hstings</title>
   <meta name="description" content="Henry's Webpage">
   <link rel="stylesheet" href="assets/css/site.css">
+  <style>
+    /* Scoped to this link; site.css and its word-reveal animation stay intact. */
+    a.foil, a.foil .w { text-decoration: none; }
+    a.foil {
+      position: relative;
+      display: inline-block;
+      background-image: linear-gradient(110deg, #6e879c, #9a82ad, #b78098, #a3996c, #6d9c91, #7f8fb6, #9a82ad, #6e879c);
+      background-size: 300% 100%;
+      background-position: 0% 50%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      transition: color .35s ease;
+      isolation: isolate;
+    }
+    a.foil .w {
+      background-image: inherit;
+      background-size: inherit;
+      background-position: inherit;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    a.foil::before {
+      content: "";
+      position: absolute;
+      inset: 4px -5px;
+      z-index: -1;
+      border-radius: 50%;
+      background: linear-gradient(100deg, #a9d5f2, #deb6e7, #efc3b5, #bce5d4);
+      filter: blur(10px);
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
+    }
+    a.foil:is(:hover, :focus-visible) {
+      color: transparent;
+      animation: foil-shimmer 3s ease-in-out infinite alternate;
+    }
+    a.foil:is(:hover, :focus-visible)::before { opacity: .65; }
+    @keyframes foil-shimmer { to { background-position: 100% 50%; } }
+    @media (prefers-reduced-motion: reduce) {
+      a.foil, a.foil::before { transition: none; }
+      a.foil:is(:hover, :focus-visible) { animation: none; background-position: 50% 50%; }
+    }
+    @media (forced-colors: active) {
+      a.foil:is(:hover, :focus-visible) { color: LinkText; }
+      a.foil::before { display: none; }
+    }
+  </style>
 </head>
 <body>
   <main>
@@ -21,9 +69,16 @@
 
     <p class="time" data-animate>My Current Time: <span id="clock" data-unit></span></p>
 
+    <p data-animate>
+      <a class="foil" href="playground/index.html">playground</a>
+    </p>
+
     <div class="links" data-animate>
-      <a href="https://x.com/hkstngs">x</a> <a href="kitchen/index.html">kitchen</a>
+      <a href="https://x.com/hkstngs">x</a> <a href="">linkedin</a> <a href="https://github.com/hstings">github</a>
     </div>
+
+
+    
   </main>
 
   <script src="assets/js/site.js"></script>
