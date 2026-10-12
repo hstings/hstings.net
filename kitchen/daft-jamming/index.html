@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harder, Better, Faster, Stronger · hstings</title>
+  <meta name="description" content="A glowing 16-button soundboard with three versions and a background track.">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="soundboard.css">
+</head>
+<body>
+  <main class="top">
+    <section>
+      <p data-animate><a href="../">Back to kitchen</a></p>
+      <h1 data-animate>Harder, Better, Faster, Stronger</h1>
+      <p data-animate>
+        Basically a web version of the app "iDaft Jamming," which is unfortunately littered with invasive ads and a bunch of junk that isn't necessary.
+      </p>
+    </section>
+
+    <section>
+      <div class="versions" id="versions" role="group" aria-label="Soundboard version" data-reveal>
+        <button class="ver" type="button" data-version="1" aria-pressed="true">Version 1</button>
+        <button class="ver" type="button" data-version="2" aria-pressed="false">Version 2</button>
+        <button class="ver" type="button" data-version="3" aria-pressed="false">Version 3</button>
+      </div>
+
+      <div class="board" id="board" data-reveal></div>
+
+      <div data-reveal>
+        <button class="ver bgplay" id="bgplay" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+          <span id="bgplay-label">Play background track</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../../assets/js/site.js"></script>
+  <script src="soundboard.js"></script>
+</body>
+</html>

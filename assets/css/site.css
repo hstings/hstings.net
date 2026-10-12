@@ -1,0 +1,170 @@
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #6b6b6b;
+  --link: #535353;
+  --line: color-mix(in srgb, #6b6b6b 40%, transparent);
+  --article-img-w: 220px; /* width of cards and photos inside articles */
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #F2F1EF; /* PANTONE® P 179-1 C */
+    --fg: #2c2828;
+    --muted: #8f8f8f;
+    --link: #49494f;
+    --line: color-mix(in srgb, #8f8f8f 45%, transparent);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  word-spacing: -0.05em;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 480px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 12vh 24px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+/* Sub-pages with more content start at the top instead of centering */
+main.top { justify-content: flex-start; }
+
+h1, h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+p { margin: 0; color: var(--muted); }
+
+section { display: flex; flex-direction: column; gap: 14px; }
+
+/* Clock digits shouldn't jitter as they change */
+#clock { font-variant-numeric: tabular-nums; }
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: var(--muted);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+a:hover { text-decoration-color: var(--link); }
+a:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.links { display: flex; gap: 16px; }
+
+/* Lists of links with a short description underneath */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: var(--muted);
+}
+
+/* Card grid (collecting page) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 400px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+.card { margin: 0; }
+.thumb {
+  aspect-ratio: 63 / 88;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card figcaption {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.card figcaption strong { display: block; font-weight: 500; color: var(--fg); }
+
+/* A single card shown inside an article (same look as the grid, capped width, centered) */
+.card.inline { max-width: var(--article-img-w); margin-inline: auto; }
+
+/* A regular photo or image inside an article: same width as a card, rounded, centered */
+.photo { margin: 0 auto; max-width: var(--article-img-w); }
+.photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.photo figcaption {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Small set icon that sits inline next to a set name */
+.set-icon {
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.2em;
+  margin-right: 6px;
+  object-fit: contain;
+}
+
+/* Intro animation: words reveal in small chunks (set in site.js), one chunk after another.
+   --i is the chunk number; the delay is capped so long pages never wait more than ~1.6s.
+   .w = a word (inline), .r = a whole block revealed at once (cards). */
+.w, .r {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(6px);
+  animation: reveal 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(min(var(--i), 24) * 60ms + 200ms);
+}
+.w { display: inline-block; white-space: pre; }
+
+/* Words inside links are inline-block, so they don't inherit the anchor's
+   underline; re-apply it per word so links can wrap across lines. */
+a .w {
+  text-decoration: underline;
+  text-decoration-color: var(--muted);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+a:hover .w { text-decoration-color: var(--link); }
+
+@keyframes reveal {
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .w, .r { animation: none; opacity: 1; filter: none; transform: none; }
+}

@@ -1,0 +1,145 @@
+/* ---------- Version selector + background play button ---------- */
+.versions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.ver {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 40px;
+  padding: 0 14px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  font: 600 14px/1 "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.004em;
+  color: var(--fg);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.ver:hover { border-color: var(--fg); }
+.ver:active { transform: scale(0.97); }
+.ver:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+.ver[aria-pressed="true"] {
+  border-color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 10%, transparent);
+}
+
+.bgplay { width: 100%; }
+
+/* ---------- Soundboard grid: 2 columns x 8 rows ---------- */
+.board {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+/* ---------- Glow button ----------
+   Each row sets its own palette through these variables. The blue set is
+   the original spec; the others are the same recipe in a different hue. */
+.sb {
+  --c1: #1E3A8A;  --c2: #2563EB;                 /* fill gradient, top to bottom */
+  --rim: #7fb0ff; --glow: #3b82f6;               /* bottom rim light + inner glows */
+  --drop: rgba(37, 99, 235, 0.4);                /* soft drop shadow */
+  --text-shadow: rgba(8, 22, 70, 0.55);
+  --h1: #2748b0;  --h2: #3b82f6;                 /* hover layer gradient */
+  --hrim1: #9cc4ff; --hrim2: #a8ccff; --hglow: #60a5fa;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 11px;
+  color: #fff;
+  font: 600 14px/1 "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.004em;
+  text-shadow: 0 1px 2px var(--text-shadow);
+  background: linear-gradient(180deg, var(--c1), var(--c2));
+  box-shadow:
+    inset 0 -1.5px 2px var(--rim),
+    inset 0 0 12px var(--glow),
+    inset 0 0 8px var(--glow),
+    0 2px 6px var(--drop);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    transform 120ms cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.25s ease,
+    filter 0.25s ease;
+}
+
+/* Brighter layer that fades in on hover (and while its sound is playing) */
+.sb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--h1), var(--h2));
+  box-shadow:
+    inset 0 -1.5px 2px var(--hrim1),
+    inset 0 1px 1.5px var(--hrim2),
+    inset 0 0 14px var(--hglow),
+    inset 0 0 10px var(--hglow);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.sb:not(:disabled):hover::before,
+.sb.playing::before { opacity: 1; }
+
+.sb:not(:disabled):active { transform: scale(0.97); }
+.sb:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+.sb svg { flex: none; filter: drop-shadow(0 1px 2px var(--text-shadow)); }
+
+/* Blocked out (version 3 locks the top half) */
+.sb:disabled {
+  cursor: not-allowed;
+  opacity: 0.2;
+  filter: grayscale(1);
+}
+
+/* ---------- Row palettes ---------- */
+.sb.red {
+  --c1: #7F1D1D; --c2: #DC2626; --rim: #ff9b9b; --glow: #ef4444;
+  --drop: rgba(220, 38, 38, 0.4); --text-shadow: rgba(70, 8, 8, 0.55);
+  --h1: #b02727; --h2: #ef4444; --hrim1: #ffb4b4; --hrim2: #ffbdbd; --hglow: #f87171;
+}
+.sb.violet {
+  --c1: #4C1D95; --c2: #7C3AED; --rim: #c4a5ff; --glow: #8b5cf6;
+  --drop: rgba(124, 58, 237, 0.4); --text-shadow: rgba(32, 10, 70, 0.55);
+  --h1: #6a2fd0; --h2: #8b5cf6; --hrim1: #d6c0ff; --hrim2: #dcc8ff; --hglow: #a78bfa;
+}
+.sb.blue { /* the defaults above */ }
+.sb.cyan {
+  --c1: #155E75; --c2: #0891B2; --rim: #7fe6ff; --glow: #06b6d4;
+  --drop: rgba(8, 145, 178, 0.4); --text-shadow: rgba(4, 40, 52, 0.55);
+  --h1: #0b8fb0; --h2: #22d3ee; --hrim1: #a5f0ff; --hrim2: #b0f2ff; --hglow: #67e8f9;
+}
+.sb.green {
+  --c1: #14532D; --c2: #16A34A; --rim: #86f0a8; --glow: #22c55e;
+  --drop: rgba(22, 163, 74, 0.4); --text-shadow: rgba(4, 40, 18, 0.55);
+  --h1: #1b7a3f; --h2: #22c55e; --hrim1: #a7f5c0; --hrim2: #b2f7c8; --hglow: #4ade80;
+}
+.sb.yellow {
+  --c1: #854D0E; --c2: #EAB308; --rim: #ffe48a; --glow: #facc15;
+  --drop: rgba(234, 179, 8, 0.4); --text-shadow: rgba(60, 35, 0, 0.6);
+  --h1: #b07a0a; --h2: #facc15; --hrim1: #fff0b0; --hrim2: #fff3c0; --hglow: #fde047;
+}
+.sb.orange {
+  --c1: #7C2D12; --c2: #EA580C; --rim: #ffb27a; --glow: #f97316;
+  --drop: rgba(234, 88, 12, 0.4); --text-shadow: rgba(70, 22, 0, 0.55);
+  --h1: #c8500d; --h2: #f97316; --hrim1: #ffc9a0; --hrim2: #ffd0aa; --hglow: #fb923c;
+}

@@ -1,115 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>hstings</title>
-
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-
-            font-family: "Inter", "Helvetica", sans-serif;
-            font-size: 16px;
-
-            display: flex;
-            justify-content: center;
-
-            background-color: #e7e0d6;
-        }
-
-        .page {
-            width: 90%;
-            max-width: 700px;
-            text-align: center;
-            padding-top: 60px;
-        }
-
-        .name {
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
-
-        nav a {
-            color: black;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-            color: blue;
-        }
-
-        .photo {
-            margin-top: 100px;
-        }
-
-        .photo img {
-            width: 400px;
-            max-width: 80vw;
-            display: block;
-            margin: auto;
-        }
-
-        .time {
-            margin-top: 18px;
-            font-size: 16px;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>hstings</title>
+  <meta name="description" content="Henry's Webpage">
+  <link rel="stylesheet" href="assets/css/site.css">
 </head>
-
 <body>
+  <main>
+    <h1 data-animate>Hi!<br>I'm Henry.</h1>
 
-    <div class="page">
+    <p data-animate>
+      I'm an 18 y/o student based out of Northwest Arkansas studying computer engineering with a concentration in cybersecurity. Currently, I'm finishing up my senior year of high school, and plan on attending the in development <a href="https://bentonvilleinstitute.tech">Bentonville Institute of Technology</a> 🌲.
+    </p>
 
-        <div class="name">
-            hstings.net
-        </div>
+    <p data-animate>
+      In my free-time, I enjoy reading, <a href="collecting/index.html">collecting Pokémon cards</a>, and working on small web projects.
+    </p>
 
-        <nav>
-            <a href="#">about</a>
-            <a href="blog/index.html">blog</a>
-            <a href="#">projects</a>
-            <a href="#">contact</a>
-            <a href="mancala.html">mancala</a>
-        </nav>
+    <p class="time" data-animate>My Current Time: <span id="clock" data-unit></span></p>
 
-        <div class="photo">
-            <img src="photo.jpg" alt="">
-        </div>
-
-        <div class="time" id="time"></div>
-
-        <br>
-
-        <div class="buttons">
-            
-            <img src="buttons/imagine.gif" alt="imagination">
-            
-        </div>
-
+    <div class="links" data-animate>
+      <a href="https://x.com/hkstngs">x</a> <a href="kitchen/index.html">kitchen</a>
     </div>
+  </main>
 
-    <script>
-        function updateTime() {
-            const now = new Date();
-
-            const time = now.toLocaleTimeString("en-US", {
-                timeZone: "America/Chicago",
-                hour: "numeric",
-                minute: "2-digit",
-                second: "2-digit"
-            });
-
-            document.getElementById("time").textContent = "TIME IN FAYETTEVILLE: " + time + " CDT";
-        }
-        
-        updateTime();
-        setInterval(updateTime, 1000);
-    </script>
-
+  <script src="assets/js/site.js"></script>
 </body>
 </html>
