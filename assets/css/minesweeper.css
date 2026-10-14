@@ -1,0 +1,20 @@
+/* Original site.css owns page typography, spacing, colors, and reveals. */
+.controls { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 14px; }
+.controls label { color: var(--muted); }
+select, button { font: inherit; color: inherit; word-spacing: inherit; }
+select { background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 2px 0; }
+.text-button { padding: 0; background: none; border: 0; color: var(--link); text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 3px; cursor: pointer; }
+.text-button:hover { text-decoration-color: var(--link); }
+select:focus-visible, button:focus-visible, .game-scroll:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+.game-scroll { align-self: center; max-width: calc(100vw - 24px); overflow-x: auto; padding: 4px; }
+.game-shell { --unit: 2px; width: max-content; background: #c0c0c0; padding: calc(var(--unit) * 6); border: calc(var(--unit) * 2) solid; border-color: #fff #808080 #808080 #fff; }
+.game-header { display: flex; justify-content: space-between; align-items: center; gap: calc(var(--unit) * 8); padding: calc(var(--unit) * 4); margin-bottom: calc(var(--unit) * 6); border: var(--unit) solid; border-color: #808080 #fff #fff #808080; }
+.counter { display: flex; gap: 0; background: #000; padding: 0; }
+.counter img { display: block; width: calc(var(--unit) * 13); height: calc(var(--unit) * 23); image-rendering: pixelated; }
+.face { width: calc(var(--unit) * 24); height: calc(var(--unit) * 24); padding: 0; background: none; border: 0; cursor: pointer; touch-action: manipulation; }
+.face img { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+#board { display: grid; grid-template-columns: repeat(var(--columns), calc(var(--unit) * 16)); border: var(--unit) solid; border-color: #808080 #fff #fff #808080; width: max-content; }
+.board-row { display: contents; }
+.cell { position: relative; width: calc(var(--unit) * 16); height: calc(var(--unit) * 16); border: 0; border-radius: 0; padding: 0; background: #c0c0c0; touch-action: manipulation; cursor: default; }
+.cell img { display: block; width: 100%; height: 100%; image-rendering: pixelated; pointer-events: none; }
+.cell:focus-visible { z-index: 1; outline-offset: -2px; outline: 2px solid var(--fg); }

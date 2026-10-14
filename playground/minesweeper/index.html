@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>minesweeper — hstings</title>
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/minesweeper.css">
+</head>
+<body>
+  <main class="top">
+    <div data-animate><a href="../index.html">back</a></div>
+    <section>
+      <h1 data-animate>minesweeper</h1>
+      <p data-animate>A little classic. Find the empty squares, flag the mines, and try not to click the wrong one.</p>
+    </section>
+    <section>
+      <div class="controls" data-reveal>
+        <label for="size">board</label>
+        <select id="size"><option value="small">small · 9 × 9</option><option value="medium">medium · 16 × 16</option><option value="large">large · 30 × 16</option></select>
+        <label for="difficulty">difficulty</label>
+        <select id="difficulty"><option value="easy">easy</option><option value="normal">normal</option><option value="hard">hard</option></select>
+        <label for="zoom">zoom</label>
+        <select id="zoom"><option value="1">1×</option><option value="2" selected>2×</option><option value="3">3×</option><option value="4">4×</option><option value="fit">fit screen</option></select>
+      </div>
+      <div class="controls" data-reveal>
+        <button id="new-game" class="text-button" type="button">new game</button>
+        <button id="flag-mode" class="text-button" type="button" aria-pressed="false">flag mode: off</button>
+      </div>
+    </section>
+    <section class="game-section">
+      <div class="game-scroll" tabindex="0" aria-label="Minesweeper board area; scroll horizontally for larger boards" data-reveal>
+        <div id="game-shell" class="game-shell">
+          <div class="game-header">
+            <div id="mine-counter" class="counter" role="img" aria-label="10 mines remaining"></div>
+            <button id="face" class="face" type="button" aria-label="Smiley face: start a new game"><img id="face-art" src="../../assets/tiles/face-ready.svg" alt="" draggable="false"></button>
+            <div id="timer" class="counter" role="img" aria-label="0 seconds elapsed"></div>
+          </div>
+          <div id="board" role="grid" aria-label="Minesweeper" aria-describedby="instructions"></div>
+        </div>
+      </div>
+      <p id="status" role="status" aria-live="polite">Your first square is safe.</p>
+    </section>
+    <section>
+      <p id="instructions" data-animate>Click to reveal. Right-click to flag. On a revealed number, click again to open its neighbors when enough flags are placed.</p>
+      <p data-animate>On touch screens, turn on flag mode. With a keyboard, use the arrow keys, Enter to reveal, and F to flag. Click the smiley to start again.</p>
+    </section>
+  </main>
+  <script src="../../assets/js/site.js"></script>
+  <script src="../../assets/js/minesweeper-core.js"></script>
+  <script src="../../assets/js/minesweeper.js"></script>
+</body>
+</html>
