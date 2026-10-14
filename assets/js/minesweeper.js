@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const tiles = '../img/tiles/';
+  const tiles = '../../assets/img/tiles/';
   const sizes = { small: [9, 9], medium: [16, 16], large: [30, 16] };
   const densities = { easy: 10 / 81, normal: 40 / 256, hard: 99 / 480 };
   let game, buttons = [], flagMode = false, focused = 0, startedAt = null, seconds = 0;
